@@ -5,7 +5,9 @@ import (
 	"st-crawler/fetcher"
 )
 
-func Run(seeds ...Request)  {
+type SimpleEngine struct {}
+
+func (SimpleEngine) Run(seeds ...Request)  {
 	var requests []Request
 	for _,s := range seeds{
 		requests = append(requests,s)
@@ -15,22 +17,27 @@ func Run(seeds ...Request)  {
 		r := requests[0]
 		requests = requests[1:]
 
-		log.Printf("URL : %s",r.Url)
-		body, err := fetcher.Fetcher(r.Url)
-
+		result, err := worker(r)
 		if err != nil {
-			log.Printf("fetcher error %s err:%v",r.Url,err)
 			continue
 		}
-
-		result := r.ParseFunction(body)
-
 		requests = append(requests,result.Request...)
 
 		for _,item := range result.Item{
 			log.Printf("%s",item)
 		}
-
 	}
 	
+}
+func worker(r Request) (ParseResult,error){
+	log.Printf("URL : %s",r.Url)
+	body, err := fetcher.Fetcher(r.Url)
+
+	if err != nil {
+		log.Printf("fetcher error %s err:%v",r.Url,err)
+		return ParseResult{},err
+	}
+
+	return r.ParseFunction(body),nil
+
 }

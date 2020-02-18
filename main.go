@@ -1,13 +1,17 @@
 package main
 
 import (
-	XuanGuBao "st-crawler/XuanGuBao/parser"
+	"st-crawler/XuanGuBao/parser"
 	"st-crawler/engine"
+	"st-crawler/scheduler"
 )
 
 func main() {
 
-	engine.Run(engine.Request{Url:"https://xuangubao.cn/live",ParseFunction:XuanGuBao.LiveParse})
+	e := engine.ConcurrentEngine{
+		WorkerCount: 10,
+		Scheduler:   &scheduler.SimpleScheduler{},
+	}
+	e.Run(engine.Request{Url: "https://xuangubao.cn/live", ParseFunction: XuanGuBao.LiveParse})
 
 }
-
