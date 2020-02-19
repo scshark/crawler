@@ -10,24 +10,25 @@ type ConcurrentEngine struct {
 }
 type Scheduler interface {
 	Submit(Request)
-	ConfigureMasterWorkerChan(chan Request)
-	WorkerReady(chan Request)
+	MakeRequestChan() chan Request
 	Run()
+	ReadyNotifier
+}
+type ReadyNotifier interface {
+	WorkerReady(chan Request)
 }
 
 func (c *ConcurrentEngine) Run(seed ...Request) {
 
 	c.Scheduler.Run()
 	// make channel in and out
-	// in := make(chan Request)
 	out := make(chan ParseResult)
 
 	// make worker by workerCount
 	for i := 0; i < c.WorkerCount; i++ {
-		createWorker(out,c.Scheduler)
+		createWorker(c.Scheduler.MakeRequestChan(),out,c.Scheduler)
 	}
 
-	// configure worker channel for scheduler
 
 	// c.Scheduler.ConfigureMasterWorkerChan(in)
 	// submit request to scheduler
@@ -48,12 +49,12 @@ func (c *ConcurrentEngine) Run(seed ...Request) {
 	// print of result items
 	// send result request to channel in
 }
-func createWorker(out chan ParseResult,s Scheduler) {
+func createWorker(in chan Request,out chan ParseResult,r ReadyNotifier) {
 	// make a goroutine
-	in := make(chan Request)
+	// in := make(chan Request)
 	go func() {
 		for {
-			s.WorkerReady(in)
+			r.WorkerReady(in)
 			requests := <- in
 			result, err := worker(requests)
 			if err != nil {
