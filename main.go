@@ -9,8 +9,8 @@ import (
 func main() {
 
 	e := engine.ConcurrentEngine{
-		WorkerCount: 10,
-		Scheduler:   &scheduler.SimpleScheduler{},
+		WorkerCount: 30,
+		Scheduler:   &scheduler.QueueScheduler{},
 	}
 	e.Run(engine.Request{Url: "https://xuangubao.cn/live", ParseFunction: XuanGuBao.LiveParse})
 

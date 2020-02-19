@@ -2,7 +2,6 @@ package engine
 
 import (
 	"log"
-	"time"
 )
 
 type ConcurrentEngine struct {
@@ -12,20 +11,25 @@ type ConcurrentEngine struct {
 type Scheduler interface {
 	Submit(Request)
 	ConfigureMasterWorkerChan(chan Request)
+	WorkerReady(chan Request)
+	Run()
 }
 
 func (c *ConcurrentEngine) Run(seed ...Request) {
 
+	c.Scheduler.Run()
 	// make channel in and out
-	in := make(chan Request)
+	// in := make(chan Request)
 	out := make(chan ParseResult)
+
 	// make worker by workerCount
 	for i := 0; i < c.WorkerCount; i++ {
-		c.createWorker(in, out)
+		createWorker(out,c.Scheduler)
 	}
+
 	// configure worker channel for scheduler
 
-	c.Scheduler.ConfigureMasterWorkerChan(in)
+	// c.Scheduler.ConfigureMasterWorkerChan(in)
 	// submit request to scheduler
 	for _, s := range seed {
 		c.Scheduler.Submit(s)
@@ -44,10 +48,12 @@ func (c *ConcurrentEngine) Run(seed ...Request) {
 	// print of result items
 	// send result request to channel in
 }
-func (ConcurrentEngine) createWorker(in chan Request, out chan ParseResult) {
+func createWorker(out chan ParseResult,s Scheduler) {
 	// make a goroutine
+	in := make(chan Request)
 	go func() {
 		for {
+			s.WorkerReady(in)
 			requests := <- in
 			result, err := worker(requests)
 			if err != nil {
