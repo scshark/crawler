@@ -80,3 +80,4 @@ func extractSlice(content []byte, compile *regexp.Regexp, i int) []string {
 
 	return result
 }
+

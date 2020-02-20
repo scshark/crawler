@@ -33,6 +33,9 @@ func (c *ConcurrentEngine) Run(seed ...Request) {
 	// c.Scheduler.ConfigureMasterWorkerChan(in)
 	// submit request to scheduler
 	for _, s := range seed {
+		if isDuplicate(s.Url) {
+			continue
+		}
 		c.Scheduler.Submit(s)
 	}
 	// engine start
@@ -42,6 +45,9 @@ func (c *ConcurrentEngine) Run(seed ...Request) {
 			log.Printf("%s",item)
 		}
 		for _,request := range result.Request  {
+			if isDuplicate(request.Url) {
+				continue
+			}
 			c.Scheduler.Submit(request)
 		}
 	}
@@ -69,4 +75,14 @@ func createWorker(in chan Request,out chan ParseResult,r ReadyNotifier) {
 	// send result to out channel
 	// else continue
 
+}
+
+var DuplicateUrl = make(map[string]bool)
+
+func isDuplicate(Url string) bool {
+	if _, ok := DuplicateUrl[Url]; ok {
+		return true
+	}
+	DuplicateUrl[Url] = true
+	return false
 }
