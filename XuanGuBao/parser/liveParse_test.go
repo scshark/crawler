@@ -6,7 +6,7 @@ import (
 )
 
 func TestLiveParse(t *testing.T) {
-	body, err := ioutil.ReadFile("liveParse.html")
+	body, err := ioutil.ReadFile("liveParse.txt")
 	if err != nil{
 		t.Errorf("cant read fiel err:%v",err)
 	}

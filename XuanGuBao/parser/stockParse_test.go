@@ -8,7 +8,7 @@ import (
 
 func TestStockParse(t *testing.T) {
 
-	bytes, err := ioutil.ReadFile("stockParse.html")
+	bytes, err := ioutil.ReadFile("stockParse.txt")
 	if err != nil {
 		panic("read file err")
 	}

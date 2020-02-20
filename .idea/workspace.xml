@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="287286c4-8094-4579-97a3-b1196ddc3a1e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/XuanGuBao/config/app.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/XuanGuBao/parser/recommendParse.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/XuanGuBao/parser/recommendParse_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XuanGuBao/parser/liveParse.go" beforeDir="false" afterPath="$PROJECT_DIR$/XuanGuBao/parser/liveParse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XuanGuBao/parser/stockParse.go" beforeDir="false" afterPath="$PROJECT_DIR$/XuanGuBao/parser/stockParse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/concurrent.go" beforeDir="false" afterPath="$PROJECT_DIR$/engine/concurrent.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/simple.go" beforeDir="false" afterPath="$PROJECT_DIR$/engine/simple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fetcher/fetcher.go" beforeDir="false" afterPath="$PROJECT_DIR$/fetcher/fetcher.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-    </list>
+    <list default="true" id="287286c4-8094-4579-97a3-b1196ddc3a1e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +86,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/engine/concurrent.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-613">
+            <state relative-caret-position="-40">
               <caret line="28" column="67" lean-forward="true" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
             </state>
           </provider>
@@ -139,13 +127,13 @@
       <find>MustCompile</find>
       <find>canCheckPrefix</find>
       <find>MakeRequestChan</find>
-      <find>Request</find>
       <find>京东方A将独家供应</find>
       <find>百利科技：再次调整定增</find>
       <find>做好疫情防护，结合农时引导</find>
       <find>实控人拟向证券业支持民</find>
       <find>它或是市场下一爆</find>
       <find>2020/02/20</find>
+      <find>Request</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
@@ -266,7 +254,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go">
+  <component name="RunManager" selected="Go Test.TestLiveParse in st-crawler/XuanGuBao/parser">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="crawler" />
       <working_directory value="$PROJECT_DIR$" />
@@ -274,6 +262,17 @@
       <filePath value="$PROJECT_DIR$/main.go" />
       <package value="st-crawler" />
       <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestLiveParse in st-crawler/XuanGuBao/parser" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="crawler" />
+      <working_directory value="$PROJECT_DIR$/XuanGuBao/parser" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="st-crawler/XuanGuBao/parser" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^TestLiveParse$" />
       <method v="2" />
     </configuration>
     <configuration name="TestRecommendParse in st-crawler/XuanGuBao/parser" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -289,6 +288,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestLiveParse in st-crawler/XuanGuBao/parser" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Test.TestRecommendParse in st-crawler/XuanGuBao/parser" />
       </list>
@@ -304,7 +304,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1581905841908</updated>
-      <workItem from="1581905847472" duration="46655000" />
+      <workItem from="1581905847472" duration="47078000" />
     </task>
     <servers />
   </component>
@@ -341,7 +341,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46655000" />
+    <option name="totallyTimeSpent" value="47078000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1792" height="1120" extended-state="0" />
@@ -501,16 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/XuanGuBao/parser/recommendParse.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="40" column="70" selection-start-line="40" selection-start-column="70" selection-end-line="40" selection-end-column="70" />
-          <folding>
-            <element signature="e#19#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/engine/simple.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="703">
@@ -555,9 +545,19 @@
     <entry file="file://$PROJECT_DIR$/XuanGuBao/parser/liveParse.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/XuanGuBao/parser/recommendParse.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="654">
+          <caret line="40" column="70" selection-start-line="40" selection-start-column="70" selection-end-line="40" selection-end-column="70" />
+          <folding>
+            <element signature="e#19#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/engine/concurrent.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-613">
+        <state relative-caret-position="-40">
           <caret line="28" column="67" lean-forward="true" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
         </state>
       </provider>
