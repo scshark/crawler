@@ -1,15 +1,26 @@
 package config
 
-type WebConfig struct {
+type webConfig struct {
 	Host string
 	Domain string
 	ArticleModel string
 	RecommendNum string
 }
-
-var Web = WebConfig{
+type esConfig struct {
+	ProIndex string
+	ProType string
+	TestIndex string
+	TestType string
+}
+var Web = webConfig{
 	Host:"https://xuangubao.cn",
 	Domain:"xuangubao.cn",
 	ArticleModel: "/article/",
 	RecommendNum: "50",
+}
+var EsConfig = esConfig{
+	ProIndex:"xuangubao",
+	ProType:"stock",
+	TestIndex:"xuangubao_test",
+	TestType:"stock",
 }

@@ -2,6 +2,7 @@ package XuanGuBao
 
 import (
 	"regexp"
+	"st-crawler/XuanGuBao/config"
 	"st-crawler/common"
 	"st-crawler/engine"
 	"st-crawler/model"
@@ -71,8 +72,8 @@ func StockParse(title string,articleUrl string, content []byte) engine.ParseResu
 	parseResult.Item = append(parseResult.Item, engine.Item{
 		Url: articleUrl,
 		Id: articleId[0],
-		Index: "xuangubao",
-		Type: "stock",
+		Index: config.EsConfig.ProIndex,
+		Type: config.EsConfig.ProType,
 		PayLoad:article,
 	})
 	parseResult.Request = append(parseResult.Request, engine.Request{
