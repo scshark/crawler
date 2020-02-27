@@ -8,7 +8,7 @@ import (
 	"st-crawler/engine"
 )
 
-func recommendParse(body []byte) engine.ParseResult{
+func recommendParse(_ string,body []byte) engine.ParseResult{
 
 	notResult := engine.ParseResult{}
 	json, err := simplejson.NewJson(body)
@@ -41,13 +41,14 @@ func recommendParse(body []byte) engine.ParseResult{
 			articleUrl := config.Web.Host + config.Web.ArticleModel +  articleId
 			result.Request = append(result.Request,engine.Request{
 				Url:articleUrl,
-				ParseFunction: func(bytes []byte) engine.ParseResult {
-					return StockParse(articleTitle,articleUrl,bytes)
-				},
+				ParseFunction: stockParseFunction(articleTitle),
 			})
 		}
 
 	}
 	return result
 
+}
+func getRecommendUrl(articleId string) string  {
+	return "https://baoer-api.xuangubao.cn/api/v6/message/recommend_messages_page_token/" + articleId + "?token=&limit="+config.Web.RecommendNum
 }

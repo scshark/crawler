@@ -10,7 +10,7 @@ func TestLiveParse(t *testing.T) {
 	if err != nil{
 		t.Errorf("cant read fiel err:%v",err)
 	}
-	result := LiveParse(body)
+	result := LiveParse("",body)
 
 	requests := result.Request[0]
 	if requests.Url == ""{

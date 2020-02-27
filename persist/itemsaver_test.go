@@ -41,15 +41,17 @@ func TestSave(t *testing.T) {
 			},
 		},
 	}
-	err := Save(expected)
-	if err != nil {
-		t.Errorf("save error %v",err)
-	}
 
 	client, err := elastic.NewClient(elastic.SetSniff(false))
 	if err != nil {
 		t.Errorf("create elastic client error %v",err)
 	}
+	err = Save(client,expected)
+	if err != nil {
+		t.Errorf("save error %v",err)
+	}
+
+
 	response, err := client.Get().
 		Index(expected.Index).
 		Type(expected.Type).

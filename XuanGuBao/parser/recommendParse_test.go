@@ -10,6 +10,5 @@ func TestRecommendParse(t *testing.T) {
 	if err != nil {
 		panic("fetcher error")
 	}
-	recommendParse(bytes)
-	// t.Errorf("%T",bytes)
+	recommendParse("",bytes)
 }

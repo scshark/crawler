@@ -2,6 +2,7 @@ package XuanGuBao
 
 import (
 	"regexp"
+	"st-crawler/common"
 	"st-crawler/engine"
 	"st-crawler/model"
 	"strings"
@@ -57,9 +58,7 @@ func StockParse(title string,articleUrl string, content []byte) engine.ParseResu
 	if len(plateSub) > 0 {
 		for _, p := range plateSub {
 			mPlate := model.Plate{}
-
-			plateName := strings.Replace(string(p[1]), "\n", "", -1)
-			plateName = strings.Replace(plateName, " ", "", -1)
+			plateName := common.RemoveAllLineSpace(string(p[1]))
 			mPlate.Name = plateName
 			mPlate.Float = string(p[2])
 			plate = append(plate, mPlate)
@@ -76,6 +75,10 @@ func StockParse(title string,articleUrl string, content []byte) engine.ParseResu
 		Type: "stock",
 		PayLoad:article,
 	})
+	parseResult.Request = append(parseResult.Request, engine.Request{
+		Url: getRecommendUrl(articleId[0]),
+		ParseFunction: recommendParse,
+	})
 	return parseResult
 }
 func extractSlice(content []byte, compile *regexp.Regexp, i int) []string {
@@ -91,5 +94,10 @@ func extractSlice(content []byte, compile *regexp.Regexp, i int) []string {
 	}
 
 	return result
+}
+func stockParseFunction(name string) engine.ParseFunction  {
+	return func(url string, bytes []byte) engine.ParseResult {
+		return StockParse(name,url,bytes)
+	}
 }
 

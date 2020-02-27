@@ -7,6 +7,7 @@ import (
 	"st-crawler/engine"
 )
 
+// 存储器 goroutine去接收item channel的数据 给es存储
 func ItemServer() (chan engine.Item,error) {
 	client, err := elastic.NewClient(elastic.SetSniff(false))
 	if err != nil {
@@ -30,13 +31,13 @@ func ItemServer() (chan engine.Item,error) {
 	}()
 	return itemChan,nil
 }
+// es存储数据  ---es7 以后一个index只能有一个type
 func Save(client *elastic.Client,item engine.Item) ( err error) {
 
 	indexService := client.Index().
 		Index(item.Index).
 		Type(item.Type).
 		BodyJson(item)
-
 
 	if item.Id != "" {
 		indexService.Id(item.Id)

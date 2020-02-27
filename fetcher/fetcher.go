@@ -30,6 +30,7 @@ func Fetcher(Url string) ([]byte, error) {
 	return ioutil.ReadAll(utf8Reader)
 
 }
+// 获取编码格式
 func determineEncoding(r *bufio.Reader) encoding.Encoding {
 	bytes, err := r.Peek(1024)
 	if err != nil {

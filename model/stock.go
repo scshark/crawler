@@ -1,6 +1,8 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type Article struct {
 	Title string
@@ -25,6 +27,7 @@ type Plate struct {
 	// MessageDate string
 }
 
+// 将map转换为需要的结构体
 func FromJson(c interface{}) (Article,error) {
 
 	jsonBytes, err := json.Marshal(c)
@@ -39,3 +42,6 @@ func FromJson(c interface{}) (Article,error) {
 	return article,nil
 
 }
+// func XubParseFunction(parser func(string,string,[]byte)) engine. {
+// 	return parser
+// }
