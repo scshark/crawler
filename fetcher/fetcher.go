@@ -10,9 +10,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 func Fetcher(Url string) ([]byte, error) {
+	time.Sleep(200 * time.Millisecond)
 	resp, err := http.Get(Url)
 	if err != nil {
 		return nil, err

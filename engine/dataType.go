@@ -6,5 +6,5 @@ type Request struct {
 }
 type ParseResult struct {
 	Request []Request
-	Item []interface{}
+	Item []Item
 }

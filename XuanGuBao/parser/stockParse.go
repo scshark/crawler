@@ -19,8 +19,9 @@ var stockParseCompile = regexp.MustCompile(
 // plate
 var plateParseCompile = regexp.MustCompile(
 	`<div class="info_[0-9a-zA-Z]+"><header><a.+>([^<]+)</a></header>[^<]?<span[^>]+>([^<]+)</span>`)
-
-func StockParse(title string, content []byte) engine.ParseResult {
+var idParseCompile = regexp.MustCompile(
+	`https://xuangubao.cn/article/([\d]+)`)
+func StockParse(title string,articleUrl string, content []byte) engine.ParseResult {
 
 	//
 	parseResult := engine.ParseResult{}
@@ -48,6 +49,7 @@ func StockParse(title string, content []byte) engine.ParseResult {
 			stock = append(stock, mStock)
 		}
 	}
+	article.Stock = stock
 
 	// plate
 	var plate []model.Plate
@@ -63,8 +65,17 @@ func StockParse(title string, content []byte) engine.ParseResult {
 			plate = append(plate, mPlate)
 		}
 	}
+	article.Plate = plate
 
-	parseResult.Item = append(parseResult.Item, article, stock, plate)
+	// get id by url
+	articleId := extractSlice([]byte(articleUrl),idParseCompile,1)
+	parseResult.Item = append(parseResult.Item, engine.Item{
+		Url: articleUrl,
+		Id: articleId[0],
+		Index: "xuangubao",
+		Type: "stock",
+		PayLoad:article,
+	})
 	return parseResult
 }
 func extractSlice(content []byte, compile *regexp.Regexp, i int) []string {
@@ -73,6 +84,7 @@ func extractSlice(content []byte, compile *regexp.Regexp, i int) []string {
 
 	if len(match) > i {
 		for k := range result {
+			// 已经忽略了匹配到的第一个数据
 			result[k] = string(match[k+1])
 		}
 		// result

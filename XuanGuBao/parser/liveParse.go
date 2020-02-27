@@ -20,11 +20,11 @@ func LiveParse(content []byte) engine.ParseResult {
 		if strings.Index(resUrl, config.Web.Domain) == -1 {
 			resUrl = config.Web.Host + resUrl
 		}
-		parseResult.Item = append(parseResult.Item, title)
+		// parseResult.Item = append(parseResult.Item, title)
 		parseResult.Request = append(parseResult.Request, engine.Request{
 			Url: resUrl,
 			ParseFunction: func(bytes []byte) engine.ParseResult {
-				return StockParse(title, bytes)
+				return StockParse(title,resUrl, bytes)
 			},
 		})
 		if len(recommendUrl) > 2 {

@@ -42,7 +42,7 @@ func recommendParse(body []byte) engine.ParseResult{
 			result.Request = append(result.Request,engine.Request{
 				Url:articleUrl,
 				ParseFunction: func(bytes []byte) engine.ParseResult {
-					return StockParse(articleTitle,bytes)
+					return StockParse(articleTitle,articleUrl,bytes)
 				},
 			})
 		}

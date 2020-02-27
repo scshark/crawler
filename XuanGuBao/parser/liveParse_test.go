@@ -16,10 +16,5 @@ func TestLiveParse(t *testing.T) {
 	if requests.Url == ""{
 		t.Errorf("url not found")
 	}
-	item := result.Item[0].(string)
 
-	expectedItem := "中储粮湖北分公司投放国家一次性储备玉米7万余吨保市场供应"
-	if expectedItem != item{
-		t.Errorf("item expected %v ,but was %v",expectedItem,item)
-	}
 }

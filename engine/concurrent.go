@@ -1,12 +1,9 @@
 package engine
 
-import (
-	"log"
-)
-
 type ConcurrentEngine struct {
 	WorkerCount int
 	Scheduler   Scheduler
+	ItemChan    chan Item
 }
 type Scheduler interface {
 	Submit(Request)
@@ -17,7 +14,13 @@ type Scheduler interface {
 type ReadyNotifier interface {
 	WorkerReady(chan Request)
 }
-
+type Item struct {
+	Id string
+	Url string
+	Index string
+	Type string
+	PayLoad interface{}
+}
 func (c *ConcurrentEngine) Run(seed ...Request) {
 
 	c.Scheduler.Run()
@@ -42,7 +45,10 @@ func (c *ConcurrentEngine) Run(seed ...Request) {
 	for {
 		result := <- out
 		for _,item := range result.Item{
-			log.Printf("%s",item)
+			// log.Printf("%s",item)
+			go func() {
+				c.ItemChan <- item
+			}()
 		}
 		for _,request := range result.Request  {
 			if isDuplicate(request.Url) {
