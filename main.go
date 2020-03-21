@@ -21,6 +21,10 @@ func main() {
 		Scheduler:   &scheduler.SimpleScheduler{},
 		ItemChan:saveItemsChan,
 	}
+	
 	e.Run(engine.Request{Url: "https://xuangubao.cn/live", ParseFunction: XuanGuBao.LiveParse})
 
 }
+
+
+
